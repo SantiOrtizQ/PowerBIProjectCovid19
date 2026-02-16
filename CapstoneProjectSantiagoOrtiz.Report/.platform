@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "CapstoneProjectSantiagoOrtiz"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "28f3e0fd-b029-4e56-af02-f4ecd5efcd48"
+  }
+}

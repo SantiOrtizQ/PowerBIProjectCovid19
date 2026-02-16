@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "CapstoneProjectSantiagoOrtiz"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "455f1b74-245c-49ed-9467-59cc474937da"
+  }
+}
