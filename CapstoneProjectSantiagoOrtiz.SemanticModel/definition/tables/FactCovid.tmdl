@@ -1,0 +1,48 @@
+table FactCovid
+	lineageTag: cbad25c5-add3-4ab7-ae2d-e0c06529353d
+
+	column DateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 955f9d5f-2da9-4881-8438-e183079c8ad5
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CountryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 3d3fd1db-a81f-433b-a9dc-5646e22c5cbe
+		summarizeBy: none
+		sourceColumn: CountryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: int64
+		formatString: 0
+		lineageTag: f6d4fce1-5001-44ea-97a5-4f691a27d293
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactCovid = m
+		mode: import
+		source =
+				let
+				    Source = Table.NestedJoin(CleanSourceCovid, {"Country/Region"}, DimCountry, {"Country"}, "DimCountry", JoinKind.LeftOuter),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Attribute", type text}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Changed Type", {"Attribute"}, DimDate, {"BadDate"}, "DimDate", JoinKind.LeftOuter),
+				    #"Expanded DimCountry" = Table.ExpandTableColumn(#"Merged Queries", "DimCountry", {"CountryKey"}, {"CountryKey"}),
+				    #"Expanded DimDate" = Table.ExpandTableColumn(#"Expanded DimCountry", "DimDate", {"DateKey"}, {"DateKey"}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Expanded DimDate",{"DateKey", "CountryKey", "Country/Region", "Attribute", "Value"}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Reordered Columns",{"Attribute", "Country/Region"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

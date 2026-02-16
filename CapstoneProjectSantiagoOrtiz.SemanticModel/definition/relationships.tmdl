@@ -1,0 +1,8 @@
+relationship AutoDetected_c2468949-ca15-4add-9f60-1d546544283f
+	fromColumn: FactCovid.CountryKey
+	toColumn: DimCountry.CountryKey
+
+relationship AutoDetected_1ec0233b-721e-436a-bb81-f9f3d953c979
+	fromColumn: FactCovid.DateKey
+	toColumn: DimDate.DateKey
+

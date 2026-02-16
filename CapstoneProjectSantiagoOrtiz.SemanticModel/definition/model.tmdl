@@ -10,5 +10,12 @@ annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_ProTooling = ["DevMode"]
 
+annotation PBI_QueryOrder = ["source","CleanSourceCovid","DimCountry","DimDate","FactCovid","_Measures"]
+
+ref table DimCountry
+ref table DimDate
+ref table FactCovid
+ref table _Measures
+
 ref cultureInfo en-US
 
