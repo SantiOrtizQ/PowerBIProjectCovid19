@@ -19,20 +19,24 @@ table DimCountry
 		annotation SummarizationSetBy = Automatic
 
 	column Longitude
-		dataType: string
+		dataType: double
 		lineageTag: 81aa00e9-d338-4577-835f-bc74044e9c4d
 		summarizeBy: none
 		sourceColumn: Longitude
 
 		annotation SummarizationSetBy = Automatic
 
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column Latitude
-		dataType: string
+		dataType: double
 		lineageTag: 3fc20a43-8ff7-4fa1-9849-66ac424ff968
 		summarizeBy: none
 		sourceColumn: Latitude
 
 		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column id
 		dataType: string
@@ -66,12 +70,15 @@ table DimCountry
 				    #"Added Index" = Table.AddIndexColumn(#"Renamed Columns", "Index", 1, 1, Int64.Type),
 				    #"Reordered Columns" = Table.ReorderColumns(#"Added Index",{"Index", "Country"}),
 				    #"Renamed Columns1" = Table.RenameColumns(#"Reordered Columns",{{"Index", "CountryKey"}}),
-				    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns1", {"Country"}, source_countries, {"Country.1"}, "countries", JoinKind.FullOuter),
+				    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns1", {"Country"}, source_countries, {"Country"}, "countries", JoinKind.LeftOuter),
 				    #"Expanded countries" = Table.ExpandTableColumn(#"Merged Queries", "countries", {"id", "value", "Longitude", "Latitude"}, {"id", "value", "Longitude", "Latitude"}),
 				    #"Renamed Columns2" = Table.RenameColumns(#"Expanded countries",{{"value", "Region"}}),
-				    #"Filtered Rows" = Table.SelectRows(#"Renamed Columns2", each [CountryKey] <> null)
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Renamed Columns2",{{"Country", type text}, {"id", type text}, {"Region", type text}, {"Longitude", type number}, {"Latitude", type number}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Changed Type2",null,"Other",Replacer.ReplaceValue,{"Region"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Replaced Value", each [Country] <> "Holy See"),
+				    #"Filtered Rows1" = Table.SelectRows(#"Filtered Rows", each [Country] <> "MS Zaandam")
 				in
-				    #"Filtered Rows"
+				    #"Filtered Rows1"
 
 	annotation PBI_NavigationStepName = Navigation
 

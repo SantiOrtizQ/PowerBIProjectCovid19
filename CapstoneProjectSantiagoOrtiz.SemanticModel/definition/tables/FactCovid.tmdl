@@ -31,19 +31,10 @@ table FactCovid
 
 		annotation SummarizationSetBy = User
 
-	column Index
-		dataType: int64
-		formatString: 0
-		lineageTag: e3e53745-c9f6-4274-9d6b-8b946fa84c86
-		summarizeBy: none
-		sourceColumn: Index
-
-		annotation SummarizationSetBy = User
-
 	column Column =
 			
-			VAR previous_day=PREVIOUSDAY(DimDate[FullDate])
-			VAR ValuePD=CALCULATE([TotalValue], DimDate[FullDate]=previous_day)
+			VAR previous_day=PREVIOUSDAY(DimDate[Date])
+			VAR ValuePD=CALCULATE([Acumulated Cases], DimDate[Date]=previous_day)
 			VAR result=FactCovid[Value]-ValuePD
 			RETURN
 			result
@@ -61,15 +52,15 @@ table FactCovid
 				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Attribute", type text}}),
 				    #"Merged Queries" = Table.NestedJoin(#"Changed Type", {"Attribute"}, DimDate, {"BadDate"}, "DimDate", JoinKind.LeftOuter),
 				    #"Expanded DimCountry" = Table.ExpandTableColumn(#"Merged Queries", "DimCountry", {"CountryKey"}, {"CountryKey"}),
-				    #"Expanded DimDate" = Table.ExpandTableColumn(#"Expanded DimCountry", "DimDate", {"DateKey"}, {"DateKey"}),
+				    #"Sorted Rows1" = Table.Sort(#"Expanded DimCountry",{{"CountryKey", Order.Ascending}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Sorted Rows1", each [CountryKey] <> null),
+				    #"Expanded DimDate" = Table.ExpandTableColumn(#"Filtered Rows", "DimDate", {"DateKey"}, {"DateKey"}),
 				    #"Reordered Columns" = Table.ReorderColumns(#"Expanded DimDate",{"DateKey", "CountryKey", "Country/Region", "Attribute", "Value"}),
 				    #"Removed Columns" = Table.RemoveColumns(#"Reordered Columns",{"Attribute", "Country/Region"}),
-				    #"Sorted Rows" = Table.Sort(#"Removed Columns",{{"CountryKey", Order.Ascending}, {"DateKey", Order.Ascending}}),
-				    #"Reordered Columns1" = Table.ReorderColumns(#"Sorted Rows",{"CountryKey", "DateKey", "Value"}),
-				    #"Added Index" = Table.AddIndexColumn(#"Reordered Columns1", "Index", 1, 1, Int64.Type),
-				    #"Reordered Columns2" = Table.ReorderColumns(#"Added Index",{"Index", "CountryKey", "DateKey", "Value"})
+				    #"Sorted Rows2" = Table.Sort(#"Removed Columns",{{"CountryKey", Order.Ascending}, {"DateKey", Order.Ascending}}),
+				    #"Reordered Columns1" = Table.ReorderColumns(#"Sorted Rows2",{"CountryKey", "DateKey", "Value"})
 				in
-				    #"Reordered Columns2"
+				    #"Reordered Columns1"
 
 	annotation PBI_NavigationStepName = Navigation
 

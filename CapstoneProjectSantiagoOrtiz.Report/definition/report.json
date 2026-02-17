@@ -24,6 +24,19 @@
           }
         }
       }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
     ]
   },
   "resourcePackages": [
@@ -43,9 +56,9 @@
       "type": "RegisteredResources",
       "items": [
         {
-          "name": "world-countries-geomap5778119407505349.json",
-          "path": "world-countries-geomap5778119407505349.json",
-          "type": "ShapeMap"
+          "name": "Background9756131297556141.png",
+          "path": "Background9756131297556141.png",
+          "type": "Image"
         }
       ]
     }

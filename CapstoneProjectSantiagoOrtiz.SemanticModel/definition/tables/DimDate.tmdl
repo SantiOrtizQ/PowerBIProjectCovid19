@@ -11,13 +11,13 @@ table DimDate
 
 		annotation SummarizationSetBy = Automatic
 
-	column FullDate
+	column Date
 		dataType: dateTime
 		isKey
 		formatString: Short Date
 		lineageTag: 866286df-8231-4ee0-92fc-c644ca405250
 		summarizeBy: none
-		sourceColumn: FullDate
+		sourceColumn: Date
 
 		annotation SummarizationSetBy = Automatic
 
@@ -101,9 +101,10 @@ table DimDate
 				    #"Added Custom" = Table.AddColumn(#"Removed Columns2", "Custom", each Date.WeekOfYear([FullDate])),
 				    #"Renamed Columns3" = Table.RenameColumns(#"Added Custom",{{"Custom", "Week"}}),
 				    #"Reordered Columns5" = Table.ReorderColumns(#"Renamed Columns3",{"DateKey", "FullDate", "Day", "Week", "Month", "Year", "BadDate"}),
-				    #"Changed Type4" = Table.TransformColumnTypes(#"Reordered Columns5",{{"FullDate", type date}})
+				    #"Changed Type4" = Table.TransformColumnTypes(#"Reordered Columns5",{{"FullDate", type date}}),
+				    #"Renamed Columns4" = Table.RenameColumns(#"Changed Type4",{{"FullDate", "Date"}})
 				in
-				    #"Changed Type4"
+				    #"Renamed Columns4"
 
 	annotation PBI_NavigationStepName = Navigation
 
