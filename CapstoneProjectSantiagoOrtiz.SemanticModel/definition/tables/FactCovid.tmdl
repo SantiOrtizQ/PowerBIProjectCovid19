@@ -1,4 +1,5 @@
 table FactCovid
+	excludeFromModelRefresh
 	lineageTag: cbad25c5-add3-4ab7-ae2d-e0c06529353d
 
 	column DateKey
@@ -17,14 +18,38 @@ table FactCovid
 		summarizeBy: none
 		sourceColumn: CountryKey
 
+		changedProperty = SortByColumn
+
 		annotation SummarizationSetBy = Automatic
 
 	column Value
 		dataType: int64
 		formatString: 0
 		lineageTag: f6d4fce1-5001-44ea-97a5-4f691a27d293
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Value
+
+		annotation SummarizationSetBy = User
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: e3e53745-c9f6-4274-9d6b-8b946fa84c86
+		summarizeBy: none
+		sourceColumn: Index
+
+		annotation SummarizationSetBy = User
+
+	column Column =
+			
+			VAR previous_day=PREVIOUSDAY(DimDate[FullDate])
+			VAR ValuePD=CALCULATE([TotalValue], DimDate[FullDate]=previous_day)
+			VAR result=FactCovid[Value]-ValuePD
+			RETURN
+			result
+		formatString: 0
+		lineageTag: f53b5d05-3cf1-441e-b2eb-7b70e4784b5c
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 
@@ -38,9 +63,13 @@ table FactCovid
 				    #"Expanded DimCountry" = Table.ExpandTableColumn(#"Merged Queries", "DimCountry", {"CountryKey"}, {"CountryKey"}),
 				    #"Expanded DimDate" = Table.ExpandTableColumn(#"Expanded DimCountry", "DimDate", {"DateKey"}, {"DateKey"}),
 				    #"Reordered Columns" = Table.ReorderColumns(#"Expanded DimDate",{"DateKey", "CountryKey", "Country/Region", "Attribute", "Value"}),
-				    #"Removed Columns" = Table.RemoveColumns(#"Reordered Columns",{"Attribute", "Country/Region"})
+				    #"Removed Columns" = Table.RemoveColumns(#"Reordered Columns",{"Attribute", "Country/Region"}),
+				    #"Sorted Rows" = Table.Sort(#"Removed Columns",{{"CountryKey", Order.Ascending}, {"DateKey", Order.Ascending}}),
+				    #"Reordered Columns1" = Table.ReorderColumns(#"Sorted Rows",{"CountryKey", "DateKey", "Value"}),
+				    #"Added Index" = Table.AddIndexColumn(#"Reordered Columns1", "Index", 1, 1, Int64.Type),
+				    #"Reordered Columns2" = Table.ReorderColumns(#"Added Index",{"Index", "CountryKey", "DateKey", "Value"})
 				in
-				    #"Removed Columns"
+				    #"Reordered Columns2"
 
 	annotation PBI_NavigationStepName = Navigation
 

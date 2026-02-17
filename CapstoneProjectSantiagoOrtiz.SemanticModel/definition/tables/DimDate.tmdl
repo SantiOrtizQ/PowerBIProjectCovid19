@@ -1,5 +1,6 @@
 table DimDate
 	lineageTag: 9fcfc3a6-f08a-4146-8894-e273a92a2789
+	dataCategory: Time
 
 	column DateKey
 		dataType: int64
@@ -12,7 +13,8 @@ table DimDate
 
 	column FullDate
 		dataType: dateTime
-		formatString: Long Date
+		isKey
+		formatString: Short Date
 		lineageTag: 866286df-8231-4ee0-92fc-c644ca405250
 		summarizeBy: none
 		sourceColumn: FullDate
@@ -98,9 +100,10 @@ table DimDate
 				    #"Removed Columns2" = Table.RemoveColumns(#"Reordered Columns4",{"Last Characters"}),
 				    #"Added Custom" = Table.AddColumn(#"Removed Columns2", "Custom", each Date.WeekOfYear([FullDate])),
 				    #"Renamed Columns3" = Table.RenameColumns(#"Added Custom",{{"Custom", "Week"}}),
-				    #"Reordered Columns5" = Table.ReorderColumns(#"Renamed Columns3",{"DateKey", "FullDate", "Day", "Week", "Month", "Year", "BadDate"})
+				    #"Reordered Columns5" = Table.ReorderColumns(#"Renamed Columns3",{"DateKey", "FullDate", "Day", "Week", "Month", "Year", "BadDate"}),
+				    #"Changed Type4" = Table.TransformColumnTypes(#"Reordered Columns5",{{"FullDate", type date}})
 				in
-				    #"Reordered Columns5"
+				    #"Changed Type4"
 
 	annotation PBI_NavigationStepName = Navigation
 
