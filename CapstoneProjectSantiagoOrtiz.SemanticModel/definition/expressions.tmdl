@@ -23,3 +23,25 @@ expression CleanSourceCovid =
 
 	annotation PBI_ResultType = Table
 
+expression source_countries =
+		let
+		    Source = Json.Document(File.Contents("C:\Users\Santiago\Desktop\PowerBICourse\Week 4\CapstoneProject\countries.json")),
+		    #"Converted to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Converted to Table",{{"Column1", type any}}),
+		    Column1 = #"Changed Type"{1}[Column1],
+		    #"Converted to Table1" = Table.FromList(Column1, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+		    #"Expanded Column1" = Table.ExpandRecordColumn(#"Converted to Table1", "Column1", {"name", "region", "longitude", "latitude"}, {"name", "region", "longitude", "latitude"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Expanded Column1",{{"name", "Country"}, {"region", "Region"}, {"longitude", "Longitude"}, {"latitude", "Latitude"}}),
+		    #"Expanded Region" = Table.ExpandRecordColumn(#"Renamed Columns", "Region", {"id", "value"}, {"id", "value"}),
+		    #"Split Column by Delimiter" = Table.SplitColumn(#"Expanded Region", "Country", Splitter.SplitTextByEachDelimiter({","}, QuoteStyle.Csv, false), {"Country.1", "Country.2"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Split Column by Delimiter",{{"Country.1", type text}, {"Country.2", type text}}),
+		    #"Removed Columns" = Table.RemoveColumns(#"Changed Type1",{"Country.2"}),
+		    #"Sorted Rows" = Table.Sort(#"Removed Columns",{{"Country.1", Order.Ascending}})
+		in
+		    #"Sorted Rows"
+	lineageTag: 1ca2c16f-8a8b-44b3-a192-7d9b59714641
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

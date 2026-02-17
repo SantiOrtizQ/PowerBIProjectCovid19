@@ -2,7 +2,7 @@ table _Measures
 	lineageTag: 3da1353c-5808-4000-bd85-75c575cfe368
 
 	measure TotalValue = SUM(FactCovid[Value])
-		formatString: 0
+		formatString: #,0
 		lineageTag: 5d2a902a-6ba8-4a38-baa0-95df1fd044b9
 
 	measure TotalValuePD =
@@ -14,8 +14,8 @@ table _Measures
 		formatString: 0
 		lineageTag: 71a86696-71da-4d58-85d2-f833fa5aea4c
 
-	measure NewCases = [TotalValue]-[TotalValuePD]
-		formatString: 0
+	measure Cases = [TotalValue]-[TotalValuePD]
+		formatString: #,0
 		lineageTag: 3ef9dc80-1017-48b3-80f8-cac98d152a74
 
 	column -

@@ -37,6 +37,17 @@
           "type": "BaseTheme"
         }
       ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "world-countries-geomap5778119407505349.json",
+          "path": "world-countries-geomap5778119407505349.json",
+          "type": "ShapeMap"
+        }
+      ]
     }
   ],
   "settings": {

@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
   "name": "6d7ce992d6e18fb7329c",
   "position": {
-    "x": 88,
-    "y": 56,
+    "x": 136,
+    "y": 80,
     "z": 0,
-    "height": 392,
-    "width": 456,
+    "height": 472,
+    "width": 312,
     "tabOrder": 0
   },
   "visual": {
@@ -43,7 +43,7 @@
               },
               "queryRef": "DimDate.FullDate",
               "nativeQueryRef": "FullDate",
-              "active": true
+              "active": false
             }
           ]
         },
@@ -57,25 +57,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "TotalValue"
-                }
-              },
-              "queryRef": "_Measures.TotalValue",
-              "nativeQueryRef": "TotalValue"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Measures"
-                    }
-                  },
-                  "Property": "NewCases"
+                  "Property": "Cases"
                 }
               },
               "queryRef": "_Measures.NewCases",
-              "nativeQueryRef": "NewCases"
+              "nativeQueryRef": "Cases"
             }
           ]
         }
@@ -114,20 +100,7 @@
             "isPinned": true
           }
         ],
-        "root": {
-          "children": [
-            {
-              "identityValues": [
-                {
-                  "Literal": {
-                    "Value": "'Albania'"
-                  }
-                }
-              ],
-              "isToggled": true
-            }
-          ]
-        }
+        "root": {}
       }
     ],
     "drillFilterOtherVisuals": true
@@ -149,20 +122,6 @@
         "type": "Categorical"
       },
       {
-        "name": "56cc7a66fd2be4112541",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "TotalValue"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
         "name": "3ea4c6974aa97a0892a4",
         "field": {
           "Measure": {
@@ -171,7 +130,7 @@
                 "Entity": "_Measures"
               }
             },
-            "Property": "NewCases"
+            "Property": "Cases"
           }
         },
         "type": "Advanced"
