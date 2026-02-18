@@ -1,38 +1,19 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
-  "name": "e623e6956ce4fc3d759e",
+  "name": "d01011373b037cc37635",
   "position": {
-    "x": 640,
-    "y": 168,
-    "z": 6000,
-    "height": 280,
-    "width": 608,
-    "tabOrder": 5000
+    "x": 32,
+    "y": 312,
+    "z": 2001,
+    "height": 368,
+    "width": 592,
+    "tabOrder": 2001
   },
   "visual": {
-    "visualType": "areaChart",
+    "visualType": "pieChart",
     "query": {
       "queryState": {
         "Category": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "DimDate"
-                    }
-                  },
-                  "Property": "Date"
-                }
-              },
-              "queryRef": "DimDate.FullDate",
-              "nativeQueryRef": "Date",
-              "active": true
-            }
-          ]
-        },
-        "Series": {
           "projections": [
             {
               "field": {
@@ -46,7 +27,8 @@
                 }
               },
               "queryRef": "DimCountry.Region",
-              "nativeQueryRef": "Region"
+              "nativeQueryRef": "Region",
+              "active": true
             }
           ]
         },
@@ -60,11 +42,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Acumulated Cases"
+                  "Property": "New Cases"
                 }
               },
-              "queryRef": "_Measures.Acumulated Cases",
-              "nativeQueryRef": "Acumulated Cases"
+              "queryRef": "_Measures.New Cases",
+              "nativeQueryRef": "New Cases"
             }
           ]
         }
@@ -73,70 +55,48 @@
         "sort": [
           {
             "field": {
-              "Column": {
+              "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "DimDate"
+                    "Entity": "_Measures"
                   }
                 },
-                "Property": "Date"
+                "Property": "New Cases"
               }
             },
-            "direction": "Ascending"
+            "direction": "Descending"
           }
         ],
         "isDefaultSort": true
       }
     },
-    "objects": {
-      "categoryAxis": [
-        {
-          "properties": {
-            "labelDisplayUnits": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "legend": [
-        {
-          "properties": {
-            "position": {
-              "expr": {
-                "Literal": {
-                  "Value": "'TopCenter'"
-                }
-              }
-            },
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "valueAxis": [
-        {
-          "properties": {
-            "labelDisplayUnits": {
-              "expr": {
-                "Literal": {
-                  "Value": "1000000D"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
     "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Total Cases by Region'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "5D"
+                }
+              }
+            }
+          }
+        }
+      ],
       "border": [
         {
           "properties": {
@@ -148,19 +108,6 @@
               }
             },
             "radius": {
-              "expr": {
-                "Literal": {
-                  "Value": "5D"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "padding": [
-        {
-          "properties": {
-            "top": {
               "expr": {
                 "Literal": {
                   "Value": "5D"

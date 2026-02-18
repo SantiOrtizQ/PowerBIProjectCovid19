@@ -4,10 +4,10 @@
   "position": {
     "x": 640,
     "y": 464,
-    "z": 3002,
+    "z": 4000,
     "height": 232,
     "width": 608,
-    "tabOrder": 3002
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "pivotTable",
@@ -72,25 +72,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Cases"
+                  "Property": "New Cases"
                 }
               },
-              "queryRef": "_Measures.Cases",
-              "nativeQueryRef": "Cases"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "_Measures"
-                    }
-                  },
-                  "Property": "Acumulated Cases"
-                }
-              },
-              "queryRef": "_Measures.Acumulated Cases",
-              "nativeQueryRef": "Acumulated Cases"
+              "queryRef": "_Measures.Total Cases",
+              "nativeQueryRef": "New Cases"
             }
           ]
         }
@@ -170,6 +156,27 @@
                   "isToggled": true
                 }
               ]
+            },
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'Latin America & Caribbean'"
+                  }
+                }
+              ],
+              "children": [
+                {
+                  "identityValues": [
+                    {
+                      "Literal": {
+                        "Value": "'Colombia'"
+                      }
+                    }
+                  ],
+                  "isToggled": true
+                }
+              ]
             }
           ]
         }
@@ -190,6 +197,26 @@
               "expr": {
                 "Literal": {
                   "Value": "5D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Full Data on Cases by Day and Accumulated'"
                 }
               }
             }

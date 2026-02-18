@@ -10,7 +10,7 @@ annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_ProTooling = ["DevMode","DaxQueryView_Desktop"]
 
-annotation PBI_QueryOrder = ["source","source_countries","CleanSourceCovid","DimCountry","DimDate","FactCovid","_Measures"]
+annotation PBI_QueryOrder = ["source","source_countries","sources-countries2json","CleanSourceCovid","source-countries-indicators","source-pop","source-gdp","DimCountry","DimDate","FactCovid","_Measures"]
 
 ref table DimCountry
 ref table DimDate

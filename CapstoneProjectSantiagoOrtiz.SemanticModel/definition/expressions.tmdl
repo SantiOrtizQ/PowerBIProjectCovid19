@@ -30,12 +30,75 @@ expression source_countries =
 		    #"Changed Type" = Table.TransformColumnTypes(#"Converted to Table",{{"Column1", type any}}),
 		    Column1 = #"Changed Type"{1}[Column1],
 		    #"Converted to Table1" = Table.FromList(Column1, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
-		    #"Expanded Column1" = Table.ExpandRecordColumn(#"Converted to Table1", "Column1", {"name", "region", "longitude", "latitude"}, {"name", "region", "longitude", "latitude"}),
+		    #"Expanded Column1" = Table.ExpandRecordColumn(#"Converted to Table1", "Column1", {"id", "name", "region", "longitude", "latitude"}, {"id", "name", "region", "longitude", "latitude"}),
 		    #"Renamed Columns" = Table.RenameColumns(#"Expanded Column1",{{"name", "Country"}, {"region", "Region"}, {"longitude", "Longitude"}, {"latitude", "Latitude"}}),
-		    #"Expanded Region" = Table.ExpandRecordColumn(#"Renamed Columns", "Region", {"id", "value"}, {"id", "value"})
+		    #"Expanded Region" = Table.ExpandRecordColumn(#"Renamed Columns", "Region", {"value"}, {"value"})
 		in
 		    #"Expanded Region"
 	lineageTag: 1ca2c16f-8a8b-44b3-a192-7d9b59714641
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression sources-countries2json =
+		let
+		    Source = Json.Document(File.Contents("C:\Users\Santiago\Desktop\PowerBICourse\Week 4\CapstoneProject\countries2.json")),
+		    #"Converted to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Converted to Table",{{"Column1", type any}}),
+		    Column1 = #"Changed Type"{1}[Column1],
+		    #"Converted to Table1" = Table.FromList(Column1, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+		    #"Expanded Column1" = Table.ExpandRecordColumn(#"Converted to Table1", "Column1", {"id", "iso2Code", "name"}, {"Column1.id", "Column1.iso2Code", "Column1.name"})
+		in
+		    #"Expanded Column1"
+	lineageTag: dd15f247-6af2-4b39-b200-040d37dfd97d
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression source-countries-indicators =
+		let
+		    Source = Csv.Document(File.Contents("C:\Users\Santiago\Desktop\PowerBICourse\Week 4\CapstoneProject\countries-indicators.csv"),[Delimiter=",", Columns=54, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}, {"Column5", type text}, {"Column6", type text}, {"Column7", type text}, {"Column8", type text}, {"Column9", type text}, {"Column10", type text}, {"Column11", type text}, {"Column12", type text}, {"Column13", type text}, {"Column14", type text}, {"Column15", type text}, {"Column16", type text}, {"Column17", type text}, {"Column18", type text}, {"Column19", type text}, {"Column20", type text}, {"Column21", type text}, {"Column22", type text}, {"Column23", type text}, {"Column24", type text}, {"Column25", type text}, {"Column26", type text}, {"Column27", type text}, {"Column28", type text}, {"Column29", type text}, {"Column30", type text}, {"Column31", type text}, {"Column32", type text}, {"Column33", type text}, {"Column34", type text}, {"Column35", type text}, {"Column36", type text}, {"Column37", type text}, {"Column38", type text}, {"Column39", type text}, {"Column40", type text}, {"Column41", type text}, {"Column42", type text}, {"Column43", type text}, {"Column44", type text}, {"Column45", type text}, {"Column46", type text}, {"Column47", type text}, {"Column48", type text}, {"Column49", type text}, {"Column50", type text}, {"Column51", type text}, {"Column52", type text}, {"Column53", type text}, {"Column54", type text}}),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"Country Name", type text}, {"Country Code", type text}, {"Series Name", type text}, {"Series Code", type text}, {"1973 [YR1973]", type text}, {"1974 [YR1974]", type text}, {"1975 [YR1975]", type text}, {"1976 [YR1976]", type text}, {"1977 [YR1977]", type text}, {"1978 [YR1978]", type text}, {"1979 [YR1979]", type text}, {"1980 [YR1980]", type text}, {"1981 [YR1981]", type text}, {"1982 [YR1982]", type text}, {"1983 [YR1983]", type text}, {"1984 [YR1984]", type text}, {"1985 [YR1985]", type text}, {"1986 [YR1986]", type text}, {"1987 [YR1987]", type text}, {"1988 [YR1988]", type text}, {"1989 [YR1989]", type text}, {"1990 [YR1990]", type text}, {"1991 [YR1991]", type text}, {"1992 [YR1992]", type text}, {"1993 [YR1993]", type text}, {"1994 [YR1994]", type text}, {"1995 [YR1995]", type text}, {"1996 [YR1996]", type text}, {"1997 [YR1997]", type text}, {"1998 [YR1998]", type text}, {"1999 [YR1999]", type text}, {"2000 [YR2000]", type text}, {"2001 [YR2001]", type text}, {"2002 [YR2002]", type text}, {"2003 [YR2003]", type text}, {"2004 [YR2004]", type text}, {"2005 [YR2005]", type text}, {"2006 [YR2006]", type text}, {"2007 [YR2007]", type text}, {"2008 [YR2008]", type text}, {"2009 [YR2009]", type text}, {"2010 [YR2010]", type text}, {"2011 [YR2011]", type text}, {"2012 [YR2012]", type text}, {"2013 [YR2013]", type text}, {"2014 [YR2014]", type text}, {"2015 [YR2015]", type text}, {"2016 [YR2016]", type text}, {"2017 [YR2017]", type text}, {"2018 [YR2018]", type text}, {"2019 [YR2019]", type text}, {"2020 [YR2020]", type text}, {"2021 [YR2021]", type text}, {"2022 [YR2022]", type text}}),
+		    #"Filtered Rows" = Table.SelectRows(#"Changed Type1", each [Series Code] = "NY.GDP.MKTP.KD" or [Series Code] = "SP.POP.TOTL"),
+		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Filtered Rows", {"Country Name", "Country Code", "Series Name", "Series Code"}, "Attribute", "Value"),
+		    #"Filtered Rows1" = Table.SelectRows(#"Unpivoted Other Columns", each [Attribute] = "2019 [YR2019]"),
+		    #"Changed Type2" = Table.TransformColumnTypes(#"Filtered Rows1",{{"Value", Int64.Type}}),
+		    #"Removed Errors" = Table.RemoveRowsWithErrors(#"Changed Type2", {"Value"}),
+		    #"Extracted First Characters" = Table.TransformColumns(#"Removed Errors", {{"Attribute", each Text.Start(_, 4), type text}}),
+		    #"Changed Type3" = Table.TransformColumnTypes(#"Extracted First Characters",{{"Attribute", Int64.Type}})
+		in
+		    #"Changed Type3"
+	lineageTag: 14790b5f-4960-41e3-af90-9b4ed06e322c
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression source-pop =
+		let
+		    Source = #"source-countries-indicators",
+		    #"Filtered Rows" = Table.SelectRows(Source, each [Series Name] = "Population, total"),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Country Name", "Country Code", "Value"})
+		in
+		    #"Removed Other Columns"
+	lineageTag: 3342397f-5e52-465c-8800-8077b06ffd8a
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression source-gdp =
+		let
+		    Source = #"source-countries-indicators",
+		    #"Filtered Rows" = Table.SelectRows(Source, each [Series Name] = "GDP (constant 2015 US$)"),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"Country Name", "Country Code", "Value"})
+		in
+		    #"Removed Other Columns"
+	lineageTag: 57710760-e3ab-4795-9194-d450721e09fb
 
 	annotation PBI_NavigationStepName = Navigation
 

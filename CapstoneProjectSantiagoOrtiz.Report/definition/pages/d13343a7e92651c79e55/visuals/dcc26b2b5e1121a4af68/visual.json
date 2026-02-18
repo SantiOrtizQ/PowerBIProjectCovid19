@@ -1,37 +1,18 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
-  "name": "e623e6956ce4fc3d759e",
+  "name": "dcc26b2b5e1121a4af68",
   "position": {
-    "x": 640,
-    "y": 168,
-    "z": 6000,
-    "height": 280,
-    "width": 608,
-    "tabOrder": 5000
+    "x": 64,
+    "y": 208,
+    "z": 0,
+    "height": 272,
+    "width": 544,
+    "tabOrder": 0
   },
   "visual": {
-    "visualType": "areaChart",
+    "visualType": "scatterChart",
     "query": {
       "queryState": {
-        "Category": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "DimDate"
-                    }
-                  },
-                  "Property": "Date"
-                }
-              },
-              "queryRef": "DimDate.FullDate",
-              "nativeQueryRef": "Date",
-              "active": true
-            }
-          ]
-        },
         "Series": {
           "projections": [
             {
@@ -42,11 +23,30 @@
                       "Entity": "DimCountry"
                     }
                   },
-                  "Property": "Region"
+                  "Property": "Country"
                 }
               },
-              "queryRef": "DimCountry.Region",
-              "nativeQueryRef": "Region"
+              "queryRef": "DimCountry.Country",
+              "nativeQueryRef": "Country"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimCountry"
+                    }
+                  },
+                  "Property": "GDP (2019)"
+                }
+              },
+              "queryRef": "DimCountry.GDP (2019)",
+              "nativeQueryRef": "GDP (2019)",
+              "active": true
             }
           ]
         },
@@ -68,47 +68,16 @@
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "DimDate"
-                  }
-                },
-                "Property": "Date"
-              }
-            },
-            "direction": "Ascending"
-          }
-        ],
-        "isDefaultSort": true
       }
     },
     "objects": {
-      "categoryAxis": [
-        {
-          "properties": {
-            "labelDisplayUnits": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
-            }
-          }
-        }
-      ],
       "legend": [
         {
           "properties": {
-            "position": {
+            "showGradientLegend": {
               "expr": {
                 "Literal": {
-                  "Value": "'TopCenter'"
+                  "Value": "false"
                 }
               }
             },
@@ -122,13 +91,39 @@
           }
         }
       ],
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "logAxisScale": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
       "valueAxis": [
         {
           "properties": {
-            "labelDisplayUnits": {
+            "logAxisScale": {
               "expr": {
                 "Literal": {
-                  "Value": "1000000D"
+                  "Value": "true"
                 }
               }
             }
@@ -137,6 +132,19 @@
       ]
     },
     "visualContainerObjects": {
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "5D"
+                }
+              }
+            }
+          }
+        }
+      ],
       "border": [
         {
           "properties": {
@@ -148,19 +156,6 @@
               }
             },
             "radius": {
-              "expr": {
-                "Literal": {
-                  "Value": "5D"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "padding": [
-        {
-          "properties": {
-            "top": {
               "expr": {
                 "Literal": {
                   "Value": "5D"

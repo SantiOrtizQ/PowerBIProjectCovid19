@@ -54,6 +54,24 @@ table DimCountry
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Population (2019)'
+		dataType: int64
+		formatString: #,0
+		lineageTag: 4817da8e-75aa-4769-a236-88127a81bf15
+		summarizeBy: none
+		sourceColumn: Population (2019)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GDP (2019)'
+		dataType: int64
+		formatString: #,0
+		lineageTag: 6d075ee8-4fa3-48c1-9451-19ee4704a75f
+		summarizeBy: none
+		sourceColumn: GDP (2019)
+
+		annotation SummarizationSetBy = Automatic
+
 	partition DimCountry = m
 		mode: import
 		source =
@@ -76,9 +94,16 @@ table DimCountry
 				    #"Changed Type2" = Table.TransformColumnTypes(#"Renamed Columns2",{{"Country", type text}, {"id", type text}, {"Region", type text}, {"Longitude", type number}, {"Latitude", type number}}),
 				    #"Replaced Value" = Table.ReplaceValue(#"Changed Type2",null,"Other",Replacer.ReplaceValue,{"Region"}),
 				    #"Filtered Rows" = Table.SelectRows(#"Replaced Value", each [Country] <> "Holy See"),
-				    #"Filtered Rows1" = Table.SelectRows(#"Filtered Rows", each [Country] <> "MS Zaandam")
+				    #"Filtered Rows1" = Table.SelectRows(#"Filtered Rows", each [Country] <> "MS Zaandam"),
+				    #"Merged Queries1" = Table.NestedJoin(#"Filtered Rows1", {"id"}, #"source-pop", {"Country Code"}, "source-pop", JoinKind.LeftOuter),
+				    #"Expanded source-pop" = Table.ExpandTableColumn(#"Merged Queries1", "source-pop", {"Value"}, {"source-pop.Value"}),
+				    #"Renamed Columns3" = Table.RenameColumns(#"Expanded source-pop",{{"source-pop.Value", "Population (2019)"}}),
+				    #"Merged Queries2" = Table.NestedJoin(#"Renamed Columns3", {"id"}, #"source-gdp", {"Country Code"}, "source-gdp", JoinKind.LeftOuter),
+				    #"Expanded source-gdp" = Table.ExpandTableColumn(#"Merged Queries2", "source-gdp", {"Value"}, {"source-gdp.Value"}),
+				    #"Renamed Columns4" = Table.RenameColumns(#"Expanded source-gdp",{{"source-gdp.Value", "GDP (2019)"}}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Renamed Columns4","Other","Antartctica",Replacer.ReplaceText,{"Region"})
 				in
-				    #"Filtered Rows1"
+				    #"Replaced Value1"
 
 	annotation PBI_NavigationStepName = Navigation
 

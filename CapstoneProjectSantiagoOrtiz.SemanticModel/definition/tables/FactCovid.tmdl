@@ -22,12 +22,12 @@ table FactCovid
 
 		annotation SummarizationSetBy = Automatic
 
-	column Value
+	column 'Accumulated Cases'
 		dataType: int64
 		formatString: 0
 		lineageTag: f6d4fce1-5001-44ea-97a5-4f691a27d293
 		summarizeBy: none
-		sourceColumn: Value
+		sourceColumn: Accumulated Cases
 
 		annotation SummarizationSetBy = User
 
@@ -35,7 +35,7 @@ table FactCovid
 			
 			VAR previous_day=PREVIOUSDAY(DimDate[Date])
 			VAR ValuePD=CALCULATE([Acumulated Cases], DimDate[Date]=previous_day)
-			VAR result=FactCovid[Value]-ValuePD
+			VAR result=FactCovid[Accumulated Cases]-ValuePD
 			RETURN
 			result
 		formatString: 0
@@ -43,6 +43,15 @@ table FactCovid
 		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
+
+	column Values
+		dataType: int64
+		formatString: 0
+		lineageTag: e2160d04-50bd-40fe-8ec7-975a9766e172
+		summarizeBy: none
+		sourceColumn: Values
+
+		annotation SummarizationSetBy = User
 
 	partition FactCovid = m
 		mode: import
@@ -58,9 +67,22 @@ table FactCovid
 				    #"Reordered Columns" = Table.ReorderColumns(#"Expanded DimDate",{"DateKey", "CountryKey", "Country/Region", "Attribute", "Value"}),
 				    #"Removed Columns" = Table.RemoveColumns(#"Reordered Columns",{"Attribute", "Country/Region"}),
 				    #"Sorted Rows2" = Table.Sort(#"Removed Columns",{{"CountryKey", Order.Ascending}, {"DateKey", Order.Ascending}}),
-				    #"Reordered Columns1" = Table.ReorderColumns(#"Sorted Rows2",{"CountryKey", "DateKey", "Value"})
+				    #"Reordered Columns1" = Table.ReorderColumns(#"Sorted Rows2",{"CountryKey", "DateKey", "Value"}),
+				    #"Added Index" = Table.AddIndexColumn(#"Reordered Columns1", "Index", 0, 1, Int64.Type),
+				    #"Renamed Columns" = Table.RenameColumns(#"Added Index",{{"Index", "Index0"}}),
+				    #"Added Index1" = Table.AddIndexColumn(#"Renamed Columns", "Index", 1, 1, Int64.Type),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Added Index1",{{"Index", "Index1"}}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Renamed Columns1", {"Index0"}, #"Renamed Columns1", {"Index1"}, "Renamed Columns1", JoinKind.LeftOuter),
+				    #"Expanded Renamed Columns1" = Table.ExpandTableColumn(#"Merged Queries1", "Renamed Columns1", {"Value"}, {"Renamed Columns1.Value"}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Expanded Renamed Columns1",{"Index0", "Index1"}),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Removed Columns1",{{"Renamed Columns1.Value", "MovedValue"}}),
+				    #"Added Custom" = Table.AddColumn(#"Renamed Columns2", "NonAccumulatedValues", each if [DateKey]>1 then [Value]-[MovedValue] else [Value]),
+				    #"Renamed Columns3" = Table.RenameColumns(#"Added Custom",{{"Value", "Accumulated Cases"}}),
+				    #"Removed Columns2" = Table.RemoveColumns(#"Renamed Columns3",{"MovedValue"}),
+				    #"Renamed Columns4" = Table.RenameColumns(#"Removed Columns2",{{"NonAccumulatedValues", "Values"}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Renamed Columns4",{{"Values", Int64.Type}})
 				in
-				    #"Reordered Columns1"
+				    #"Changed Type1"
 
 	annotation PBI_NavigationStepName = Navigation
 

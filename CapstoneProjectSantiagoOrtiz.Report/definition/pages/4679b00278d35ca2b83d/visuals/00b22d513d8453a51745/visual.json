@@ -193,7 +193,7 @@
             "unselectedTransparency": {
               "expr": {
                 "Literal": {
-                  "Value": "100D"
+                  "Value": "72D"
                 }
               }
             }
@@ -280,6 +280,19 @@
               "expr": {
                 "Literal": {
                   "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "section": {
+              "expr": {
+                "Literal": {
+                  "Value": "'bd29f3ebf505f25ee778'"
                 }
               }
             }

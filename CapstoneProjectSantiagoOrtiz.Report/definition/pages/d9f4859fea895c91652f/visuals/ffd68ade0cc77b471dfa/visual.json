@@ -1,16 +1,16 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
-  "name": "e623e6956ce4fc3d759e",
+  "name": "ffd68ade0cc77b471dfa",
   "position": {
-    "x": 640,
-    "y": 168,
-    "z": 6000,
-    "height": 280,
-    "width": 608,
-    "tabOrder": 5000
+    "x": 48,
+    "y": 192,
+    "z": 3000,
+    "height": 288,
+    "width": 1184,
+    "tabOrder": 2000
   },
   "visual": {
-    "visualType": "areaChart",
+    "visualType": "lineStackedColumnComboChart",
     "query": {
       "queryState": {
         "Category": {
@@ -26,31 +26,31 @@
                   "Property": "Date"
                 }
               },
-              "queryRef": "DimDate.FullDate",
+              "queryRef": "DimDate.Date",
               "nativeQueryRef": "Date",
               "active": true
             }
           ]
         },
-        "Series": {
+        "Y": {
           "projections": [
             {
               "field": {
-                "Column": {
+                "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "DimCountry"
+                      "Entity": "_Measures"
                     }
                   },
-                  "Property": "Region"
+                  "Property": "New Cases"
                 }
               },
-              "queryRef": "DimCountry.Region",
-              "nativeQueryRef": "Region"
+              "queryRef": "_Measures.New Cases",
+              "nativeQueryRef": "Cases"
             }
           ]
         },
-        "Y": {
+        "Y2": {
           "projections": [
             {
               "field": {
@@ -88,55 +88,33 @@
         "isDefaultSort": true
       }
     },
-    "objects": {
-      "categoryAxis": [
-        {
-          "properties": {
-            "labelDisplayUnits": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "legend": [
-        {
-          "properties": {
-            "position": {
-              "expr": {
-                "Literal": {
-                  "Value": "'TopCenter'"
-                }
-              }
-            },
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "valueAxis": [
-        {
-          "properties": {
-            "labelDisplayUnits": {
-              "expr": {
-                "Literal": {
-                  "Value": "1000000D"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
     "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'New Cases by Day'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "5D"
+                }
+              }
+            }
+          }
+        }
+      ],
       "border": [
         {
           "properties": {
@@ -148,19 +126,6 @@
               }
             },
             "radius": {
-              "expr": {
-                "Literal": {
-                  "Value": "5D"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "padding": [
-        {
-          "properties": {
-            "top": {
               "expr": {
                 "Literal": {
                   "Value": "5D"
