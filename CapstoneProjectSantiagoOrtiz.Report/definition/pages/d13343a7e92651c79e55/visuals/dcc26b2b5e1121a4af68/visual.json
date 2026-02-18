@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
   "name": "dcc26b2b5e1121a4af68",
   "position": {
-    "x": 64,
-    "y": 208,
+    "x": 32,
+    "y": 336,
     "z": 0,
-    "height": 272,
-    "width": 544,
+    "height": 352,
+    "width": 592,
     "tabOrder": 0
   },
   "visual": {
@@ -60,11 +60,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Acumulated Cases"
+                  "Property": "Cases"
                 }
               },
-              "queryRef": "_Measures.Acumulated Cases",
-              "nativeQueryRef": "Acumulated Cases"
+              "queryRef": "_Measures.New Cases",
+              "nativeQueryRef": "Cases"
             }
           ]
         }
@@ -113,6 +113,13 @@
                   "Value": "true"
                 }
               }
+            },
+            "axisType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Scalar'"
+                }
+              }
             }
           }
         }
@@ -124,6 +131,13 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "invertAxis": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
@@ -167,5 +181,51 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "70d8b382031bce57d72b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimCountry"
+              }
+            },
+            "Property": "Country"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "5700cdcaf378eef42574",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimCountry"
+              }
+            },
+            "Property": "GDP (2019)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f97e8dc251e5f6ab6cac",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Cases"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

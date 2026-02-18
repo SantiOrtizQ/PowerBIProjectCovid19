@@ -42,10 +42,10 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "New Cases"
+                  "Property": "Cases"
                 }
               },
-              "queryRef": "_Measures.New Cases",
+              "queryRef": "_Measures.Cases",
               "nativeQueryRef": "Cases"
             }
           ]
@@ -87,6 +87,21 @@
         ],
         "isDefaultSort": true
       }
+    },
+    "objects": {
+      "legend": [
+        {
+          "properties": {
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'TopCenter'"
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "visualContainerObjects": {
       "title": [

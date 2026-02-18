@@ -8,60 +8,6 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "e98cbaf76fb287224464",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimCountry"
-              }
-            },
-            "Property": "Region"
-          }
-        },
-        "type": "Categorical",
-        "filter": {
-          "Version": 2,
-          "From": [
-            {
-              "Name": "d",
-              "Entity": "DimCountry",
-              "Type": 0
-            }
-          ],
-          "Where": [
-            {
-              "Condition": {
-                "In": {
-                  "Expressions": [
-                    {
-                      "Column": {
-                        "Expression": {
-                          "SourceRef": {
-                            "Source": "d"
-                          }
-                        },
-                        "Property": "Region"
-                      }
-                    }
-                  ],
-                  "Values": [
-                    [
-                      {
-                        "Literal": {
-                          "Value": "'North America'"
-                        }
-                      }
-                    ]
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        "howCreated": "Drillthrough"
-      },
-      {
         "name": "49357b6dcad7de78aeb7",
         "field": {
           "Column": {
@@ -103,7 +49,7 @@
                     [
                       {
                         "Literal": {
-                          "Value": "'United States'"
+                          "Value": "'Colombia'"
                         }
                       }
                     ]
@@ -121,20 +67,6 @@
     "name": "d980fb48e109f8f89469",
     "type": "Drillthrough",
     "parameters": [
-      {
-        "name": "09ad1d9e9fb578564e92",
-        "boundFilter": "e98cbaf76fb287224464",
-        "fieldExpr": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "DimCountry"
-              }
-            },
-            "Property": "Region"
-          }
-        }
-      },
       {
         "name": "dda3a93db0e9a4ae99f6",
         "boundFilter": "49357b6dcad7de78aeb7",

@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
   "name": "56c230166d0af4edcb2a",
   "position": {
-    "x": 704,
-    "y": 208,
+    "x": 656,
+    "y": 336,
     "z": 1000,
-    "height": 272,
-    "width": 512,
+    "height": 352,
+    "width": 592,
     "tabOrder": 1000
   },
   "visual": {
@@ -60,11 +60,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Final Cases Value"
+                  "Property": "Cases"
                 }
               },
-              "queryRef": "_Measures.Final Cases Value",
-              "nativeQueryRef": "Final Cases Value"
+              "queryRef": "_Measures.New Cases",
+              "nativeQueryRef": "Cases"
             }
           ]
         }

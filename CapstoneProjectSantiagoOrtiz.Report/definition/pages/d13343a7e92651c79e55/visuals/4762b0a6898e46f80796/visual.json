@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
-  "name": "d6caf3728ef345d6f8b5",
+  "name": "4762b0a6898e46f80796",
   "position": {
     "x": 32,
-    "y": 120,
-    "z": 3000,
-    "height": 112,
+    "y": 112,
+    "z": 5000,
+    "height": 80,
     "width": 592,
-    "tabOrder": 3000
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "textbox",
@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Select a year from the slicer to look at the specific data for that year.",
+                    "value": "Select a region from the tile to see the relations for a specific region.",
                     "textStyle": {
                       "color": "#ffffff"
                     }
@@ -30,7 +30,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Hover a specific country to see its accumulated Covid-19 cases evolution.",
+                    "value": "Hover a specific dot to see country's name, Covid-19 cases, as well as either GDP or Population (2019).",
                     "textStyle": {
                       "color": "#ffffff"
                     }
@@ -41,18 +41,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Right click on a specific country, then select the drillthrough option to see more details about Covid-19 cases evolution.",
-                    "textStyle": {
-                      "color": "#ffffff"
-                    }
-                  }
-                ],
-                "listType": "ordered"
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Click the (+) sign on the lower-right table to see data for countries in the specific region as well as the specific dates.",
+                    "value": "Right-click on a specific dot (country), then select the drillthrough option to see more details about Covid-19 cases evolution.",
                     "textStyle": {
                       "color": "#ffffff"
                     }

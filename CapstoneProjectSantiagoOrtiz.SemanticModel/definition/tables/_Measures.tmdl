@@ -6,7 +6,7 @@ table _Measures
 		displayFolder: Measures
 		lineageTag: 5d2a902a-6ba8-4a38-baa0-95df1fd044b9
 
-	measure 'New Cases' = SUM(FactCovid[Values])
+	measure Cases = SUM(FactCovid[Values])
 		formatString: #,0
 		displayFolder: Measures
 		lineageTag: 3ef9dc80-1017-48b3-80f8-cac98d152a74
@@ -17,9 +17,9 @@ table _Measures
 
 	measure 'Cases MoM%' =
 			
-			VAR __PREV_MONTH = CALCULATE([New Cases], DATEADD('DimDate'[Date], -1, MONTH))
+			VAR __PREV_MONTH = CALCULATE([Cases], DATEADD('DimDate'[Date], -1, MONTH))
 			RETURN
-				DIVIDE([New Cases] - __PREV_MONTH, __PREV_MONTH, 0)
+				DIVIDE([Cases] - __PREV_MONTH, __PREV_MONTH, 0)
 		formatString: 0.00%;-0.00%;0.00%
 		displayFolder: Measures
 		lineageTag: 924a3fbd-90d4-4ba6-9d79-46e8760d8c78
@@ -33,9 +33,24 @@ table _Measures
 		changedProperty = FormatString
 
 	measure 'Maximum New Cases in 1 Day' = MAX(FactCovid[Values])
-		formatString: 0
+		formatString: 0.0
 		displayFolder: Measures
 		lineageTag: 3e1f1673-c104-4868-a2c7-018b69a27ba1
+
+	measure 'Maximum Cases Date' = CALCULATE(MAX(DimDate[Date]), FILTER(ALL(FactCovid), FactCovid[Values]=MAX(FactCovid[Values])))
+		formatString: Short Date
+		displayFolder: Measures
+		lineageTag: b2a3a6f6-07ef-418a-bf3e-8d30a012b6cc
+
+	measure 'Total GDP (2019)' = SUM(DimCountry[GDP (2019)])
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Measures
+		lineageTag: 968b7658-be16-419e-b4a5-86c54e595647
+
+	measure 'Total Population (2019)' = SUM(DimCountry[Population (2019)])
+		formatString: #,0
+		displayFolder: Measures
+		lineageTag: 9e4de2b4-0bf9-4b6d-8bbd-18268aaf54d8
 
 	column -
 		dataType: string

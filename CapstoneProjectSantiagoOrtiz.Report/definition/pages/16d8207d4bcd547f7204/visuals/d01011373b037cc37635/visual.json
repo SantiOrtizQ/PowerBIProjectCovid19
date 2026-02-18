@@ -3,11 +3,11 @@
   "name": "d01011373b037cc37635",
   "position": {
     "x": 32,
-    "y": 312,
-    "z": 2001,
-    "height": 368,
+    "y": 216,
+    "z": 2000,
+    "height": 464,
     "width": 592,
-    "tabOrder": 2001
+    "tabOrder": 2000
   },
   "visual": {
     "visualType": "pieChart",
@@ -42,7 +42,7 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "New Cases"
+                  "Property": "Cases"
                 }
               },
               "queryRef": "_Measures.New Cases",
@@ -61,7 +61,7 @@
                     "Entity": "_Measures"
                   }
                 },
-                "Property": "New Cases"
+                "Property": "Cases"
               }
             },
             "direction": "Descending"

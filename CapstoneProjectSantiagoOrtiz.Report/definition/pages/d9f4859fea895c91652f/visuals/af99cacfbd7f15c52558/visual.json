@@ -51,7 +51,7 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "New Cases"
+                  "Property": "Cases"
                 }
               },
               "queryRef": "_Measures.Cases",
@@ -328,5 +328,65 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "9fa5322dd8a8a9c452bb",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimDate"
+              }
+            },
+            "Property": "Year"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "ac0e8e5f053d1807b419",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DimDate"
+              }
+            },
+            "Property": "Month"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "40578781f0f6b666ff7c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Cases"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ac5d68cc6ff8f5d8ba2f",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Cases MoM%"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

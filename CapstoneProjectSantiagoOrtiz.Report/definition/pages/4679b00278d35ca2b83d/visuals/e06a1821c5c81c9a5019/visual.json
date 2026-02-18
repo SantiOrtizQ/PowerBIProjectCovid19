@@ -72,11 +72,39 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "New Cases"
+                  "Property": "Cases"
                 }
               },
               "queryRef": "_Measures.Total Cases",
               "nativeQueryRef": "New Cases"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Total GDP (2019)"
+                }
+              },
+              "queryRef": "_Measures.Total GDP (2019)",
+              "nativeQueryRef": "Total GDP (2019)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Total Population (2019)"
+                }
+              },
+              "queryRef": "_Measures.Total Population (2019)",
+              "nativeQueryRef": "Total Population (2019)"
             }
           ]
         }
@@ -182,6 +210,61 @@
         }
       }
     ],
+    "objects": {
+      "columnFormatting": [
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1000000000D"
+                }
+              }
+            },
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Measures.Total GDP (2019)"
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "97.752544140638D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Measures.Total GDP (2019)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "152.30855536130454D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Measures.Total Population (2019)"
+          }
+        }
+      ]
+    },
     "visualContainerObjects": {
       "border": [
         {

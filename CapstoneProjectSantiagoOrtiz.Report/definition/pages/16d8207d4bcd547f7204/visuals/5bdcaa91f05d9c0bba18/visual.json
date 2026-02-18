@@ -3,11 +3,11 @@
   "name": "5bdcaa91f05d9c0bba18",
   "position": {
     "x": 640,
-    "y": 168,
-    "z": 2002,
-    "height": 312,
-    "width": 600,
-    "tabOrder": 2002
+    "y": 160,
+    "z": 3000,
+    "height": 368,
+    "width": 608,
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -138,7 +138,7 @@
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 6,
+                      "ColorId": 5,
                       "Percent": 0
                     }
                   }
@@ -222,7 +222,7 @@
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 4,
+                      "ColorId": 2,
                       "Percent": 0
                     }
                   }
@@ -264,7 +264,7 @@
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 8,
+                      "ColorId": 6,
                       "Percent": 0
                     }
                   }
@@ -306,7 +306,7 @@
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 5,
+                      "ColorId": 7,
                       "Percent": 0
                     }
                   }
@@ -348,7 +348,7 @@
                 "color": {
                   "expr": {
                     "ThemeDataColor": {
-                      "ColorId": 9,
+                      "ColorId": 8,
                       "Percent": 0
                     }
                   }
@@ -431,8 +431,9 @@
               "solid": {
                 "color": {
                   "expr": {
-                    "Literal": {
-                      "Value": "'#197278'"
+                    "ThemeDataColor": {
+                      "ColorId": 9,
+                      "Percent": 0
                     }
                   }
                 }
@@ -458,6 +459,48 @@
                     "Right": {
                       "Literal": {
                         "Value": "'Antartctica'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 4,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "DimCountry"
+                          }
+                        },
+                        "Property": "Region"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'East Asia & Pacific'"
                       }
                     }
                   }

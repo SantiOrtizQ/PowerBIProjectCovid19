@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Select a year from the slicer to look at the specific data for that year.",
+                    "value": "On the left-lower side of the dashboard, you can see the evolution of cases by month, as well as the percentage of increase of cases with respect to the previous month.",
                     "textStyle": {
                       "color": "#ffffff"
                     }
@@ -30,7 +30,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Hover a specific year to see its accumulated Covid-19 cases evolution.",
+                    "value": "In the big, central visual, the cases by day, as well as the evolution of accumulated cases are shown.",
                     "textStyle": {
                       "color": "#ffffff"
                     }
@@ -41,18 +41,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Right click on a specific country, then select the drillthrough option to see more details avoid Covid-19 cases evolution.",
-                    "textStyle": {
-                      "color": "#ffffff"
-                    }
-                  }
-                ],
-                "listType": "ordered"
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Click the (+) sign on the lower-right table to see data for countries in the specific region as well as the specific dates.",
+                    "value": "Click on any of the buttons bellow to go to another section or click on the back button in the upper-left side of the dashboard to go back to the previous dashboard.",
                     "textStyle": {
                       "color": "#ffffff"
                     }
