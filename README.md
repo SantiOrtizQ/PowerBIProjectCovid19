@@ -59,3 +59,10 @@ The interactive dashboard includes:
 - Visual storytelling through dashboard design
 
 ---
+
+
+## 👤 Author
+
+Santiago Ortiz  
+Engineering Physicist | Aspiring Data Analyst / Data Engineer  
+Open to remote opportunities (US/EU)
